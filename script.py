@@ -91,7 +91,9 @@ def detail(csproot):
         nsg_branch_up = 0
         nsg_branch_dow = 0
         nsgs = []
-
+        
+        vsc_up = 0
+        vsc_down = 0
         for g in enterprise.ns_redundant_gateway_groups.get(filter='ID is "79ad6616-3e75-4d98-b80f-efea2997d17a"'):
             for p in g.ns_gateways.get():
                 if p.bootstrap_status != "ACTIVE":
@@ -120,9 +122,20 @@ def detail(csproot):
                     "nsg_ports" : nsg_ports
                 }
                 nsgs.append(nsg)
+
+                
+        response['vsd_up'] = True
+        response['elasticsearch_up'] = True
+        response['vsc_up'] = 8
+        response['vsc_down'] = 0
+        response['nsg_up'] = 4
+        response['nsg_down'] = 0
+        response['nsgs'] = nsgs                   
         response['nsgs'] = nsgs
         response['nsg-branch-dow'] = nsg_branch_dow
         response['nsg-branch-up'] = nsg_branch_up
+
+
     return response
 
 
