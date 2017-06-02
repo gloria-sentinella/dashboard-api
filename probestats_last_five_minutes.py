@@ -12,7 +12,9 @@ def stat(SourceNSG,SrcUplink,interval):
 	      "query": {
 	        "range" : {
 	            "timestamp" : {
-	                "gte" : "now-5m"
+	                "gte":"now-5m",
+		            "lte":"now",
+		            "format":"epoch_millis"
 	            }
 	        }
 	      },
