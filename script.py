@@ -19,7 +19,6 @@ app = Flask(__name__)
 CORS(app)
 # Auth vars
 
-"""
 vsd_ip = '192.168.0.20'
 api_url = "https://192.168.0.20:8443"
 username = "csproot"
@@ -27,11 +26,11 @@ password = "csproot"
 enterprise = "csp"
 """
 vsd_ip = '147.75.69.37'
-api_url = "https://147.75.69.37:8443"
+api_url = "https://vsd1.sdn40r8.lab:8443" #"http://147.75.69.37:8443"
 username = "csproot"
 password = "csproot"
 enterprise = "csp"
-
+"""
 def setup_logging():
     pass
     #set_log_level(logging.DEBUG, logging.Streamhandler())
