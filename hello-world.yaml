@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+   name: hellow-world-test
+spec:
+   replicas: 4
+   selector:
+      app: hello-node
+   template:
+      metadata:
+         name: hellow-world-test
+         labels:
+            app: hello-node
+            nuage.io/subnet: hello01
+            nuage.io/zone: hello01
+ 
+      spec:
+         containers:
+         - name: hello-world-test
+           image: registry.nuage.lab/hello-node:v1
+           ports:
+           - containerPort: 8080
+         imagePullSecrets:
+         - name: myregistrykey
