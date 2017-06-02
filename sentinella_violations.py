@@ -3,7 +3,7 @@ from elasticsearch import Elasticsearch
 
 client = Elasticsearch(['192.168.0.24:9200'])
 
-def stat(SourceNSG,SrcUplink,interval):
+def stat(SourceNSG,SrcUplink):
     response = client.search(
     index="nuage_dpi_slastats",
     body={

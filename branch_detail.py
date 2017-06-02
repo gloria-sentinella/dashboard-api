@@ -67,8 +67,8 @@ def detail():
                     "id": p.id,
                     "name": p.name,
                     "status" : p.bootstrap_status,
-                    "cpu_usage" : 10.0,
-                    "memory_usage" : 10.0,
+                    "cpu_usage" : 0.949485449,
+                    "memory_usage" : 1.3994949,
                     "nsg_ports" : nsg_ports
                 }
                 nsgs.append(nsg)

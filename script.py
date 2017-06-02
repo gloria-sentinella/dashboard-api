@@ -16,9 +16,9 @@ from sentinella_applications import stat as applicationsUse
 from sentinella_violations import stat as violations
 from branch_detail import detail
 app = Flask(__name__)
-
+CORS(app)
 # Auth vars
-"""
+
 vsd_ip = '192.168.0.20'
 api_url = "https://192.168.0.20:8443"
 username = "csproot"
@@ -30,7 +30,7 @@ api_url = "https://147.75.69.37:8443"
 username = "csproot"
 password = "csproot"
 enterprise = "csp"
-
+"""
 def setup_logging():
     pass
     #set_log_level(logging.DEBUG, logging.Streamhandler())
@@ -115,8 +115,8 @@ def detail(csproot):
                     "id": p.id,
                     "name": p.name,
                     "status" : p.bootstrap_status,
-                    "cpu_usage" : 10.0,
-                    "memory_usage" : 10.0,
+                    "cpu_usage" : 1.344,
+                    "memory_usage" : 4.393,
                     "nsg_ports" : nsg_ports
                 }
                 nsgs.append(nsg)
@@ -127,7 +127,7 @@ def detail(csproot):
 
 
 @app.route('/')
-@cross_origin()
+#@cross_origin()
 def table():
     setup_logging()
     csproot = start_csproot_session()
@@ -135,72 +135,72 @@ def table():
     #return render_template('table.html', vsp=vsc_health(csproot))
 
 @app.route('/nsgs/')
-@cross_origin()
+#@cross_origin()
 def nsg_detail():
     setup_logging()
     csproot = start_csproot_session()
     return jsonify(nsg_health(csproot))
 
 @app.route('/applications')
-@cross_origin()
+#@cross_origin()
 def apps():
     csproot = start_csproot_session()
     return jsonify(applications(csproot))
 
 @app.route('/appfromnsg')
-@cross_origin()
+#@cross_origin()
 def appfromnsg():
     return jsonify(stat_app_from_nsg()['hits'])
 
 @app.route('/statevents')
-@cross_origin()
+#@cross_origin()
 def statevents():
     return jsonify(stat_events()['hits'])
 
 @app.route('/slafromnsg')
-@cross_origin()
+#@cross_origin()
 def slafromnsg():
     return jsonify(stat_sla_from_nsg()['hits'])
 
 @app.route('/slatonsg')
-@cross_origin()
+#@cross_origin()
 def slatonsg():
     return jsonify(stat_sla_to_nsg()['hits'])
 
 @app.route('/slastats')
-@cross_origin()
+#@cross_origin()
 def slastats():
     URL = 'http://192.168.0.24:9200'
     DPI_sla_stats = requests.get(URL  + "/nuage_dpi_slastats-2017-05-10/_search?pretty")
     return jsonify(DPI_sla_stats.json())
 
 @app.route('/top10apps')
-@cross_origin()
+#@cross_origin()
 def top10apps():
     return jsonify(stat_top_10_apps()['hits'])
 
 @app.route('/probestats-last-five-minutes/<string:SourceNSG>/<string:SrcUplink>/<string:interval>')
-@cross_origin()
+#@cross_origin()
 def probestats(SourceNSG,SrcUplink,interval):
     return probestasts_last_five_minutes(SourceNSG,SrcUplink,interval)
 
 @app.route('/utilization-ports/<string:SourceNSG>/<string:SrcUplink>/')
-@cross_origin()
+#@cross_origin()
 def utilizationApps(SourceNSG,SrcUplink):
     return jsonify(utilization_apps(SourceNSG,SrcUplink))
 
 @app.route('/utilization-applications/<string:SourceNSG>/<string:SrcUplink>/')
-@cross_origin()
+#@cross_origin()
 def applicationsNSG(SourceNSG,SrcUplink):
     return jsonify(applicationsUse(SourceNSG,SrcUplink))
 
 @app.route('/violations/<string:SourceNSG>/<string:SrcUplink>/')
-@cross_origin()
+#@cross_origin()
 def violationsNSG(SourceNSG,SrcUplink):
     return jsonify(violations(SourceNSG,SrcUplink))
 
 @app.route('/branch-details')
-@cross_origin()
+#@cross_origin()
 def branch_detail_get():
     setup_logging()
     csproot = start_csproot_session()
