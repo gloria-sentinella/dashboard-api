@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify
 from vspk import v4_0 as vspk
+from elasticsearch import Elasticsearch
 import logging
 import requests
 from vspk.utils import set_log_level
@@ -31,6 +32,9 @@ username = "csproot"
 password = "csproot"
 enterprise = "csp"
 """
+
+clientE = Elasticsearch(['192.168.0.24:9200'])
+
 def setup_logging():
     pass
     #set_log_level(logging.DEBUG, logging.Streamhandler())
@@ -86,7 +90,7 @@ def applications(csproot):
 
 def detail(csproot):
     response = {}
-
+    alarms = []
     for enterprise in csproot.enterprises.get(filter='ID is "6e51eafc-a2d7-4f6b-9a34-bb5262b60688"'):
         nsg_branch_up = 0
         nsg_branch_dow = 0
@@ -94,6 +98,9 @@ def detail(csproot):
         
         vsc_up = 0
         vsc_down = 0
+        
+        for alarm in enterprise.alarms.get():
+            alarms.append(alarm.to_dict())
         for g in enterprise.ns_redundant_gateway_groups.get(filter='ID is "79ad6616-3e75-4d98-b80f-efea2997d17a"'):
             for p in g.ns_gateways.get():
                 if p.bootstrap_status != "ACTIVE":
@@ -135,7 +142,7 @@ def detail(csproot):
         response['nsg-branch-dow'] = nsg_branch_dow
         response['nsg-branch-up'] = nsg_branch_up
 
-
+    response['alarms'] = alarms
     return response
 
 
