@@ -132,7 +132,10 @@ def detail(csproot):
 
                 
         response['vsd_up'] = True
-        response['elasticsearch_up'] = True
+        elasticsearch_status = True
+        if not clientE.ping():
+            elasticsearch_status = False
+        response['elasticsearch_up'] = elasticsearch_status
         response['vsc_up'] = 8
         response['vsc_down'] = 0
         response['nsg_up'] = 4
