@@ -33,7 +33,7 @@ password = "csproot"
 enterprise = "csp"
 """
 
-clientE = Elasticsearch(['192.168.0.24:9200'])
+client = Elasticsearch(['192.168.0.24:9200'])
 
 def setup_logging():
     pass
@@ -109,13 +109,28 @@ def detail(csproot):
                     nsg_branch_up = nsg_branch_up +1
                 nsg_ports = []
                 for np in p.ns_ports.get():
+                    
+                    response = client.search(
+                        index="nuage_event",
+                        body={
+                              "query" : {
+                                   "term" : { "nuage_metadata.vportId" : "{0}".format(np.id) }
+                              },
+                              "sort" :[
+                                {"timestamp" : {"order" : "desc"}}
+                              ],
+                              "from" : 0, "size" : 1
+                            }
+                    )
+
                     nsg_port = {
                         "id": np.id,
                         "name": np.name,
                         "description" : np.description,
                         "status" : np.status,
                         "nsg-brach" : p.name,
-                        "nsg-branch-id" : p.id
+                        "nsg-branch-id" : p.id,
+                        "last_event":response['hits']['hits']
                     }
                     nsg_ports.append(nsg_port)
 
