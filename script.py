@@ -148,7 +148,7 @@ def detail(csproot):
                 
         response['vsd_up'] = True
         elasticsearch_status = True
-        if not clientE.ping():
+        if not client.ping():
             elasticsearch_status = False
         response['elasticsearch_up'] = elasticsearch_status
         response['vsc_up'] = 8
