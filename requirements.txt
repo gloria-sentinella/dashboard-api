@@ -24,3 +24,4 @@ ptyprocess==0.5.1
 pyasn1==0.1.9
 pycrypto==2.6.1
 vspk==5.0.1
+gunicorn==19.7.1
