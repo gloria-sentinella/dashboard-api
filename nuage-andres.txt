@@ -1,0 +1,15 @@
+
+ya te llegó el correo?
+este tiene ya todo compilado
+https://bitbucket.org/candodev/nuage-statistics/
+y este es para desarrollar con reat y asi
+react 
+https://bitbucket.org/candodev/react-app/
+
+
+jajaja ok13:01
+solo es npm install && npm run serve
+
+https://bitbucket.org/candodev/react-app/src/2fed158babf00396eba67c1c4d826f216ec15700/src/app/actions/index.js?at=master&fileviewer=file-view-default
+
+ssh sentinella@204.124.107.76
