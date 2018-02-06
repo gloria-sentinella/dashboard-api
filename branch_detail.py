@@ -11,8 +11,8 @@ import logging
 from vspk.utils import set_log_level
 
 # Auth vars
-vsd_ip = '147.75.69.37'
-api_url = "https://147.75.69.37:8443"
+vsd_ip = 'http://lab01.sentinel.la'
+api_url = "http://lab01.sentinel.la:8443"
 username = "csproot"
 password = "csproot"
 enterprise = "csp"
@@ -39,7 +39,7 @@ def start_csproot_session():
 def detail():
     response = {}
 
-    for enterprise in csproot.enterprises.get(filter='ID is "6e51eafc-a2d7-4f6b-9a34-bb5262b60688"'):
+    for enterprise in csproot.enterprises.get(filter='ID is "6e51eafc-a2d7-4f6b-9a34-bb5262b60688" '):
         nsg_branch_up = 0
         nsg_branch_dow = 0
         nsgs = []

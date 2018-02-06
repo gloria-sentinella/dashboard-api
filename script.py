@@ -11,7 +11,7 @@ from sla_from_nsg import stat as stat_sla_from_nsg
 from sla_to_nsg import stat as stat_sla_to_nsg
 from top_10_apps import stat as stat_top_10_apps
 from probestats_last_five_minutes import stat as probestasts_last_five_minutes
-from probestats_top10 import stat as probestats_top_ten
+#from probestats_top10 import stat as probestats_top_ten
 from sentinella_port import stat as  utilization_apps
 from sentinella_applications import stat as applicationsUse
 from sentinella_violations import stat as violations
@@ -20,20 +20,21 @@ app = Flask(__name__)
 CORS(app)
 # Auth vars
 
-vsd_ip = '192.168.0.20'
-api_url = "https://192.168.0.20:8443"
+ip_nuage = "172.17.0.1"
+vsd_ip = ip_nuage
+api_url = "http://172.17.0.1:8443"
 username = "csproot"
 password = "csproot"
 enterprise = "csp"
 """
-vsd_ip = '147.75.69.37'
-api_url = "https://vsd1.sdn40r8.lab:8443" #"http://147.75.69.37:8443"
+vsd_ip = '172.17.0.1'
+api_url = "http://172.17.0.1:8443" #"http://147.75.69.37:8443"
 username = "csproot"
 password = "csproot"
 enterprise = "csp"
 """
 
-client = Elasticsearch(['192.168.0.24:9200'])
+client = Elasticsearch(['172.17.0.1:9200'])
 
 def setup_logging():
     pass
